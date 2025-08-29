@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sudoku Solver</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="status-indicator" id="status-indicator">Solving...</div>
+
+    <div class="container py-5">
+      <div class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-primary">Sudoku Solver</h1>
+        <p class="lead text-white">
+          Enter your Sudoku puzzle and watch it solve step by step!
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="card shadow-lg border-0">
+            <div class="card-body">
+              <div id="sudoku-container" class="mx-auto mb-4">
+                <table id="sudoku-grid" class="mx-auto"></table>
+              </div>
+
+              <div class="d-flex justify-content-center gap-3 mb-4">
+                <button
+                  id="solve-btn"
+                  class="btn btn-success btn-lg px-4 py-2 pulse"
+                >
+                  <i class="bi bi-play-circle me-2"></i>Solve Puzzle
+                </button>
+                <button id="clear-btn" class="btn btn-warning btn-lg px-4 py-2">
+                  <i class="bi bi-arrow-repeat me-2"></i>Clear Board
+                </button>
+              </div>
+
+              <div class="d-flex justify-content-center gap-3">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="animation-toggle"
+                    checked
+                  />
+                  <label class="form-check-label" for="animation-toggle"
+                    >Step Animation</label
+                  >
+                </div>
+                <div class="input-group" style="width: 150px">
+                  <span class="input-group-text">Speed</span>
+                  <input
+                    type="range"
+                    class="form-range"
+                    id="speed-slider"
+                    min="1"
+                    max="20"
+                    value="10"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-6">
+          <div class="card bg-light border-0">
+            <div class="card-body">
+              <h5 class="card-title">How to Use</h5>
+              <ol>
+                <li>Enter your Sudoku puzzle in the grid</li>
+                <li>Click "Solve Puzzle" to see the solution</li>
+                <li>Watch the algorithm solve step by step</li>
+                <li>Use "Clear Board" to reset the grid</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-light border-0">
+            <div class="card-body">
+              <h5 class="card-title">About the Solver</h5>
+              <p>
+                This Sudoku solver uses a sophisticated recursive approach that
+                combines a classic backtracking algorithm with modern data
+                structures and heuristics to achieve exceptional speed. Rather
+                than a brute-force search, it uses the Minimum Remaining Values
+                (MRV) heuristic to intelligently select the next cell to solve,
+                prioritizing the one with the fewest possible valid numbers.
+                This dramatically reduces the number of paths it needs to
+                explore. To make each move's validation instantaneous, it uses
+                hash sets to track which numbers are in each row, column, and
+                3x3 box, allowing it to verify a number's placement in constant
+                O(1) time. Furthermore, it validates the initial board state to
+                "fail fast", immediately reporting if the puzzle is
+                fundamentally unsolvable without wasting time on a pointless
+                search.
+              </p>
+              <p class="mb-0">
+                The visualization shows each step the algorithm takes to solve
+                the puzzle.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
